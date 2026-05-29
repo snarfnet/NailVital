@@ -1,0 +1,30 @@
+name: NailVital
+options:
+  bundleIdPrefix: com.snarfnet
+  deploymentTarget:
+    iOS: "16.0"
+  defaultConfig: Release
+
+settings:
+  base:
+    PRODUCT_BUNDLE_IDENTIFIER: com.snarfnet.nailvital
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.9"
+    TARGETED_DEVICE_FAMILY: "1"  # iPhone only
+    SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+
+targets:
+  NailVital:
+    type: application
+    platform: iOS
+    sources:
+      - path: NailVital
+    info:
+      path: NailVital/Info.plist
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.snarfnet.nailvital
+        INFOPLIST_FILE: NailVital/Info.plist
+        CODE_SIGN_STYLE: Manual
+    dependencies: []
