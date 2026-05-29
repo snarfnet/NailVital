@@ -26,5 +26,6 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.snarfnet.nailvital
         INFOPLIST_FILE: NailVital/Info.plist
-        CODE_SIGN_STYLE: Manual
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: 83VGKGSQUH
     dependencies: []
