@@ -49,7 +49,7 @@ jobs:
           ASC_API_ISSUER_ID: ${{ secrets.ASC_API_ISSUER_ID }}
         run: |
           xcodebuild archive \
-            -project NailVital/NailVital.xcodeproj \
+            -project NailVital.xcodeproj \
             -scheme NailVital \
             -configuration Release \
             -archivePath $RUNNER_TEMP/NailVital.xcarchive \
