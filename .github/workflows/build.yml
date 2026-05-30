@@ -38,6 +38,119 @@ jobs:
           echo -n "$ASC_API_KEY_BASE64" | base64 --decode \
             -o ~/.appstoreconnect/private_keys/AuthKey_${ASC_API_KEY_ID}.p8
 
+      - name: Create & Install Provisioning Profile
+        env:
+          ASC_API_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
+          ASC_API_ISSUER_ID: ${{ secrets.ASC_API_ISSUER_ID }}
+          ASC_API_KEY_BASE64: ${{ secrets.ASC_API_KEY_BASE64 }}
+        run: |
+          pip3 install PyJWT requests --quiet
+          python3 << 'PYEOF'
+          import json, time, jwt, requests, base64, subprocess, os
+
+          KEY_ID    = os.environ["ASC_API_KEY_ID"]
+          ISSUER_ID = os.environ["ASC_API_ISSUER_ID"]
+          KEY_B64   = os.environ["ASC_API_KEY_BASE64"]
+          BUNDLE_ID = "com.snarfnet.nailvital"
+          TEAM_ID   = "83VGKGSQUH"
+          PP_DIR    = os.path.expanduser("~/Library/MobileDevice/Provisioning Profiles")
+          os.makedirs(PP_DIR, exist_ok=True)
+
+          private_key = base64.b64decode(KEY_B64).decode()
+          now = int(time.time())
+          token = jwt.encode(
+              {"iss": ISSUER_ID, "iat": now, "exp": now + 1200, "aud": "appstoreconnect-v1"},
+              private_key, algorithm="ES256", headers={"kid": KEY_ID}
+          )
+          h = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+
+          # 1. Find bundleId resource id
+          r = requests.get(
+              "https://api.appstoreconnect.apple.com/v1/bundleIds",
+              headers=h, params={"filter[identifier]": BUNDLE_ID}
+          )
+          data = r.json().get("data", [])
+          if not data:
+              print("Bundle ID not found in portal, registering...")
+              r2 = requests.post("https://api.appstoreconnect.apple.com/v1/bundleIds",
+                  headers=h,
+                  data=json.dumps({"data": {"type": "bundleIds", "attributes": {
+                      "identifier": BUNDLE_ID, "name": "NailVital", "platform": "IOS"
+                  }}}))
+              bid = r2.json()["data"]["id"]
+          else:
+              bid = data[0]["id"]
+          print("Bundle ID resource:", bid)
+
+          # 2. Find distribution certificate id
+          r = requests.get(
+              "https://api.appstoreconnect.apple.com/v1/certificates",
+              headers=h, params={"filter[certificateType]": "DISTRIBUTION"}
+          )
+          certs = r.json().get("data", [])
+          if not certs:
+              print("No DISTRIBUTION cert found, trying IOS_DISTRIBUTION...")
+              r = requests.get("https://api.appstoreconnect.apple.com/v1/certificates",
+                  headers=h, params={"filter[certificateType]": "IOS_DISTRIBUTION"})
+              certs = r.json().get("data", [])
+          cert_id = certs[0]["id"]
+          print("Cert ID:", cert_id)
+
+          # 3. Create App Store provisioning profile
+          payload = {
+              "data": {
+                  "type": "profiles",
+                  "attributes": {
+                      "name": f"NailVital AppStore {int(time.time())}",
+                      "profileType": "IOS_APP_STORE"
+                  },
+                  "relationships": {
+                      "bundleId": {"data": {"type": "bundleIds", "id": bid}},
+                      "certificates": {"data": [{"type": "certificates", "id": cert_id}]},
+                      "devices": {"data": []}
+                  }
+              }
+          }
+          r = requests.post("https://api.appstoreconnect.apple.com/v1/profiles",
+              headers=h, data=json.dumps(payload))
+          pdata = r.json()
+          if "errors" in pdata:
+              print("Create profile error:", pdata["errors"])
+              # Try to find existing
+              r2 = requests.get("https://api.appstoreconnect.apple.com/v1/profiles",
+                  headers=h, params={"filter[profileType]": "IOS_APP_STORE",
+                                     "filter[bundleId.identifier]": BUNDLE_ID})
+              profiles = r2.json().get("data", [])
+              profile_content = profiles[0]["attributes"]["profileContent"]
+              profile_name = profiles[0]["attributes"]["name"]
+          else:
+              profile_content = pdata["data"]["attributes"]["profileContent"]
+              profile_name = pdata["data"]["attributes"]["name"]
+
+          print("Profile name:", profile_name)
+          profile_bytes = base64.b64decode(profile_content)
+          pp_path = os.path.join(PP_DIR, "NailVital.mobileprovision")
+          with open(pp_path, "wb") as f:
+              f.write(profile_bytes)
+
+          # Extract UUID
+          result = subprocess.run(
+              ["security", "cms", "-D", "-i", pp_path],
+              capture_output=True, text=True
+          )
+          import plistlib
+          plist = plistlib.loads(result.stdout.encode())
+          uuid = plist.get("UUID", "")
+          print("Profile UUID:", uuid)
+
+          if uuid:
+              uuid_path = os.path.join(PP_DIR, f"{uuid}.mobileprovision")
+              os.rename(pp_path, uuid_path)
+              with open(os.environ["GITHUB_ENV"], "a") as f:
+                  f.write(f"PROV_PROFILE_UUID={uuid}\n")
+                  f.write(f"PROV_PROFILE_NAME={profile_name}\n")
+          PYEOF
+
       - name: Generate Xcode project
         run: |
           brew install xcodegen
@@ -60,7 +173,7 @@ jobs:
             CODE_SIGN_STYLE=Manual \
             CODE_SIGN_IDENTITY="Apple Distribution" \
             DEVELOPMENT_TEAM=83VGKGSQUH \
-            PROVISIONING_PROFILE_SPECIFIER=""
+            PROVISIONING_PROFILE="$PROV_PROFILE_UUID"
 
       - name: Export IPA
         env:
@@ -80,6 +193,11 @@ jobs:
             <string>83VGKGSQUH</string>
             <key>signingCertificate</key>
             <string>Apple Distribution</string>
+            <key>provisioningProfiles</key>
+            <dict>
+              <key>com.snarfnet.nailvital</key>
+              <string>${{ env.PROV_PROFILE_NAME }}</string>
+            </dict>
           </dict>
           </plist>
           PLIST
