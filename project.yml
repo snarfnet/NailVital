@@ -38,5 +38,6 @@ targets:
         GENERATE_INFOPLIST_FILE: NO
         CODE_SIGN_STYLE: Manual
         DEVELOPMENT_TEAM: 83VGKGSQUH
+        TARGETED_DEVICE_FAMILY: "1"
         "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "arm64 x86_64"
     dependencies: []
