@@ -20,6 +20,8 @@ targets:
     platform: iOS
     sources:
       - path: NailVital
+        excludes:
+          - "LaunchScreen.storyboard"
     info:
       path: NailVital/Info.plist
     settings:
