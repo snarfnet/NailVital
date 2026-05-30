@@ -156,6 +156,18 @@ jobs:
           brew install xcodegen
           xcodegen generate --spec project.yml
 
+      - name: Register iOS Simulator Runtime
+        run: |
+          RUNTIME="/Applications/Xcode_16.2.app/Contents/Developer/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime"
+          if [ -d "$RUNTIME" ]; then
+            echo "Registering bundled iOS simulator runtime..."
+            xcrun simctl runtime add "$RUNTIME" 2>&1 || true
+          else
+            echo "Bundled runtime not found, downloading platform..."
+            sudo xcodebuild -downloadPlatform iOS 2>&1 | tail -5 || true
+          fi
+          xcrun simctl list runtimes 2>&1 | head -20
+
       - name: Build Archive
         env:
           ASC_API_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
