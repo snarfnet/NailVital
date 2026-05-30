@@ -24,6 +24,13 @@ targets:
           - "LaunchScreen.storyboard"
     info:
       path: NailVital/Info.plist
+      properties:
+        CFBundleDisplayName: "Nail Vital"
+        NSCameraUsageDescription: "爪の色を解析し、健康チェックの参考情報を表示するためにカメラを使用します。"
+        LSRequiresIPhoneOS: true
+        UIRequiredDeviceCapabilities:
+          - arm64
+          - video-camera
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.snarfnet.nailvital
