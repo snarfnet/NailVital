@@ -174,6 +174,8 @@ jobs:
           /usr/libexec/PlistBuddy -c "Add :UISupportedInterfaceOrientations:3 string UIInterfaceOrientationLandscapeRight" "$PLIST"
           /usr/libexec/PlistBuddy -c "Delete :UILaunchScreen" "$PLIST" 2>/dev/null || true
           /usr/libexec/PlistBuddy -c "Add :UILaunchScreen dict" "$PLIST"
+          /usr/libexec/PlistBuddy -c "Delete :ITSAppUsesNonExemptEncryption" "$PLIST" 2>/dev/null || true
+          /usr/libexec/PlistBuddy -c "Add :ITSAppUsesNonExemptEncryption bool false" "$PLIST"
           echo "=== Info.plist after patch ==="
           cat "$PLIST"
 
