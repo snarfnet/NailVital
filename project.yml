@@ -2,7 +2,7 @@ name: NailVital
 options:
   bundleIdPrefix: com.snarfnet
   deploymentTarget:
-    iOS: "16.0"
+    iOS: "17.0"
   defaultConfig: Release
 
 settings:
