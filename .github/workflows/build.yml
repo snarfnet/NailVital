@@ -165,7 +165,7 @@ jobs:
             -project NailVital.xcodeproj \
             -scheme NailVital \
             -configuration Release \
-            -destination 'generic/platform=iOS' \
+            -sdk iphoneos \
             -archivePath $RUNNER_TEMP/NailVital.xcarchive \
             -allowProvisioningUpdates \
             -authenticationKeyPath ~/.appstoreconnect/private_keys/AuthKey_${ASC_API_KEY_ID}.p8 \
