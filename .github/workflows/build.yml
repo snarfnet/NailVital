@@ -174,7 +174,9 @@ jobs:
             CODE_SIGN_STYLE=Manual \
             CODE_SIGN_IDENTITY="Apple Distribution" \
             DEVELOPMENT_TEAM=83VGKGSQUH \
-            PROVISIONING_PROFILE="$PROV_PROFILE_UUID"
+            PROVISIONING_PROFILE="$PROV_PROFILE_UUID" \
+            SUPPORTED_PLATFORMS=iphoneos \
+            SDKROOT=iphoneos
 
       - name: Export IPA
         env:
