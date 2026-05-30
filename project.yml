@@ -35,6 +35,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.snarfnet.nailvital
         INFOPLIST_FILE: NailVital/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
         CODE_SIGN_STYLE: Manual
         DEVELOPMENT_TEAM: 83VGKGSQUH
         "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "arm64 x86_64"
