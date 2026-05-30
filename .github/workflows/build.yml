@@ -205,7 +205,7 @@ jobs:
             SUPPORTED_PLATFORMS=iphoneos \
             SDKROOT=iphoneos
 
-      - name: Export IPA
+      - name: Export and Upload IPA
         env:
           ASC_API_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
           ASC_API_ISSUER_ID: ${{ secrets.ASC_API_ISSUER_ID }}
@@ -217,6 +217,8 @@ jobs:
           <dict>
             <key>method</key>
             <string>app-store-connect</string>
+            <key>destination</key>
+            <string>upload</string>
             <key>signingStyle</key>
             <string>manual</string>
             <key>teamID</key>
@@ -239,14 +241,3 @@ jobs:
             -authenticationKeyPath ~/.appstoreconnect/private_keys/AuthKey_${ASC_API_KEY_ID}.p8 \
             -authenticationKeyID "$ASC_API_KEY_ID" \
             -authenticationKeyIssuerID "$ASC_API_ISSUER_ID"
-
-      - name: Upload to App Store Connect
-        env:
-          ASC_API_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
-          ASC_API_ISSUER_ID: ${{ secrets.ASC_API_ISSUER_ID }}
-        run: |
-          xcrun altool --upload-app \
-            -f $RUNNER_TEMP/export/NailVital.ipa \
-            --type ios \
-            --apiKey "$ASC_API_KEY_ID" \
-            --apiIssuer "$ASC_API_ISSUER_ID"
