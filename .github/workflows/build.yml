@@ -44,7 +44,7 @@ jobs:
           ASC_API_ISSUER_ID: ${{ secrets.ASC_API_ISSUER_ID }}
           ASC_API_KEY_BASE64: ${{ secrets.ASC_API_KEY_BASE64 }}
         run: |
-          pip3 install PyJWT requests --quiet
+          pip3 install PyJWT requests --quiet --break-system-packages
           python3 << 'PYEOF'
           import json, time, jwt, requests, base64, subprocess, os
 
