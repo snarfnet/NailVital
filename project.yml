@@ -28,6 +28,14 @@ targets:
         CFBundleDisplayName: "Nail Vital"
         NSCameraUsageDescription: "爪の色を解析し、健康チェックの参考情報を表示するためにカメラを使用します。"
         LSRequiresIPhoneOS: true
+        UIRequiresFullScreen: true
+        UILaunchScreen:
+          UIColorName: ""
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
         UIRequiredDeviceCapabilities:
           - arm64
           - video-camera
