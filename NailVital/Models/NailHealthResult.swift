@@ -89,36 +89,36 @@ enum NailStatus: String, CaseIterable, Codable {
 
     var titleJP: String {
         switch self {
-        case .healthy:             return "健康的"
-        case .cyanosis:            return "チアノーゼの可能性"
-        case .yellowNailSyndrome:  return "黄色爪症候群の可能性"
-        case .terryNails:          return "テリー爪の可能性"
-        case .lindsaysNails:       return "リンジー爪の可能性"
-        case .leukonychia:         return "白色爪の可能性"
-        case .melanonychia:        return "黒色線条の可能性"
-        case .splinterHemorrhage:  return "線状出血の可能性"
-        case .redLunula:           return "赤色爪半月の可能性"
-        case .azureLunula:         return "青色爪半月の可能性"
-        case .pallidAnemia:        return "蒼白爪の可能性"
-        case .polycythemia:        return "深赤色爪の可能性"
+        case .healthy:             return "健康的なピンク色"
+        case .cyanosis:            return "青みがかった色合い"
+        case .yellowNailSyndrome:  return "黄色みのある色合い"
+        case .terryNails:          return "白っぽい爪甲"
+        case .lindsaysNails:       return "二色に分かれた色合い"
+        case .leukonychia:         return "白色が強い色合い"
+        case .melanonychia:        return "暗い縦すじ"
+        case .splinterHemorrhage:  return "暗赤色の線"
+        case .redLunula:           return "赤みのある爪半月"
+        case .azureLunula:         return "青みのある爪半月"
+        case .pallidAnemia:        return "蒼白な色合い"
+        case .polycythemia:        return "深い赤色"
         case .unknown:             return "判定できません"
         }
     }
 
     var titleEN: String {
         switch self {
-        case .healthy:             return "Healthy"
-        case .cyanosis:            return "Cyanosis"
-        case .yellowNailSyndrome:  return "Yellow Nail Syndrome"
-        case .terryNails:          return "Terry's Nails"
-        case .lindsaysNails:       return "Lindsay's Nails"
-        case .leukonychia:         return "Leukonychia"
-        case .melanonychia:        return "Melanonychia"
-        case .splinterHemorrhage:  return "Splinter Hemorrhage"
-        case .redLunula:           return "Red Lunula"
-        case .azureLunula:         return "Azure Lunula"
-        case .pallidAnemia:        return "Pallid / Anemia"
-        case .polycythemia:        return "Polycythemia"
+        case .healthy:             return "Healthy Pink"
+        case .cyanosis:            return "Bluish Tone"
+        case .yellowNailSyndrome:  return "Yellowish Tone"
+        case .terryNails:          return "Whitish Plate"
+        case .lindsaysNails:       return "Two-Tone Pattern"
+        case .leukonychia:         return "White Tone"
+        case .melanonychia:        return "Dark Streak"
+        case .splinterHemorrhage:  return "Dark Red Lines"
+        case .redLunula:           return "Reddish Lunula"
+        case .azureLunula:         return "Bluish Lunula"
+        case .pallidAnemia:        return "Pale Tone"
+        case .polycythemia:        return "Deep Red Tone"
         case .unknown:             return "Unknown"
         }
     }
@@ -128,27 +128,27 @@ enum NailStatus: String, CaseIterable, Codable {
         case .healthy:
             return "爪の色と見え方は健康的な範囲に見えます。"
         case .cyanosis:
-            return "青紫色が強く見えます。酸素飽和度の低下や心肺の不調と関連することがあります。"
+            return "青紫色が強く見えます。医学文献では、このような色合いは酸素飽和度の変化と関連が報告されています。"
         case .yellowNailSyndrome:
-            return "黄色みが強く見えます。黄色爪症候群やリンパ浮腫、呼吸器の不調と関連することがあります。"
+            return "黄色みが強く見えます。医学文献では、このような色合いはリンパ系や呼吸器系の変化と関連が報告されています。"
         case .terryNails:
-            return "爪甲が白っぽく、先端だけピンクに見える傾向です。肝疾患、心不全、糖尿病などで報告があります。"
+            return "爪甲が白っぽく、先端だけピンクに見える傾向です。医学文献では、このパターンは肝機能や循環器系の変化と関連が報告されています。"
         case .lindsaysNails:
-            return "根元が白く、先端が赤茶色に見える傾向です。慢性腎不全との関連が知られています。"
+            return "根元が白く、先端が赤茶色に見える傾向です。医学文献では、このパターンは腎機能の変化と関連が報告されています。"
         case .leukonychia:
-            return "白っぽさが目立ちます。低アルブミン血症、貧血、肝臓や腎臓の不調と関連することがあります。"
+            return "白っぽさが目立ちます。医学文献では、このような色合いは栄養状態や内臓機能の変化と関連が報告されています。"
         case .melanonychia:
-            return "茶色から黒色の縦すじが疑われます。悪性黒色腫の確認が必要な場合があります。早めに皮膚科へ相談してください。"
+            return "茶色から黒色の縦すじが見られます。医学文献では、このような色の変化にはさまざまな原因が報告されています。"
         case .splinterHemorrhage:
-            return "暗赤色の細い縦線が疑われます。感染性心内膜炎、血管炎、外傷などで見られることがあります。"
+            return "暗赤色の細い縦線が見られます。医学文献では、このような線状パターンは循環器系の変化や外的要因と関連が報告されています。"
         case .redLunula:
-            return "爪半月が赤く見える傾向です。心不全、関節リウマチ、COPDなどとの関連が報告されています。"
+            return "爪半月が赤く見える傾向です。医学文献では、このような色合いは循環器系や免疫系の変化と関連が報告されています。"
         case .azureLunula:
-            return "爪半月が青く見える傾向です。ウィルソン病などとの関連が報告されています。医師への相談をおすすめします。"
+            return "爪半月が青く見える傾向です。医学文献では、このような色合いは微量元素の代謝変化と関連が報告されています。"
         case .pallidAnemia:
-            return "全体的に蒼白に見えます。鉄欠乏性貧血、低アルブミン血症、肝疾患などと関連することがあります。"
+            return "全体的に蒼白に見えます。医学文献では、このような色合いは栄養状態や血液成分の変化と関連が報告されています。"
         case .polycythemia:
-            return "深い赤色が強く見えます。多血症などと関連することがあります。"
+            return "深い赤色が強く見えます。医学文献では、このような色合いは血液成分の変化と関連が報告されています。"
         case .unknown:
             return "爪を正面に向け、明るい場所でもう一度スキャンしてください。"
         }
@@ -157,44 +157,31 @@ enum NailStatus: String, CaseIterable, Codable {
     var descriptionEN: String {
         switch self {
         case .healthy:
-            return "Nail color and appearance look healthy."
+            return "Nail color and appearance look within a healthy range."
         case .cyanosis:
-            return "Bluish-purple nails can be associated with low oxygen saturation or cardiopulmonary disease."
+            return "In medical literature, this bluish-purple color pattern has been associated with changes in oxygen saturation levels."
         case .yellowNailSyndrome:
-            return "Yellow nails may be associated with yellow nail syndrome, lymphedema, pleural effusion, or respiratory disease."
+            return "In medical literature, this yellowish color pattern has been associated with changes in lymphatic and respiratory function."
         case .terryNails:
-            return "White nail plate with a narrow pink distal band. Reported with liver cirrhosis, heart failure, and diabetes."
+            return "In medical literature, this whitish plate with a narrow pink distal band has been associated with changes in hepatic and circulatory function."
         case .lindsaysNails:
-            return "Proximal white and distal red-brown half-and-half nails. Strongly associated with chronic renal failure."
+            return "In medical literature, this two-tone pattern (proximal white, distal red-brown) has been associated with changes in renal function."
         case .leukonychia:
-            return "White nails may be associated with hypoalbuminemia, anemia, or hepatic and renal disease."
+            return "In medical literature, this whitish color pattern has been associated with changes in nutritional status and organ function."
         case .melanonychia:
-            return "Brown to black longitudinal streak. Subungual melanoma should be ruled out by a dermatologist."
+            return "In medical literature, this dark longitudinal streak has been associated with various causes."
         case .splinterHemorrhage:
-            return "Dark red longitudinal lines. Reported with infective endocarditis, vasculitis, or trauma."
+            return "In medical literature, this dark red line pattern has been associated with circulatory changes and external factors."
         case .redLunula:
-            return "Red lunula has been reported with heart failure, rheumatoid arthritis, COPD, and Alport syndrome."
+            return "In medical literature, this reddish lunula color has been associated with circulatory and immune system changes."
         case .azureLunula:
-            return "Blue lunula may indicate Wilson's disease. Consult a physician."
+            return "In medical literature, this bluish lunula color has been associated with trace element metabolism changes."
         case .pallidAnemia:
-            return "Pale nails may be associated with iron-deficiency anemia, hypoalbuminemia, and hepatic disease."
+            return "In medical literature, this pale color pattern has been associated with changes in nutritional status and blood composition."
         case .polycythemia:
-            return "Deep red nails may indicate polycythemia."
+            return "In medical literature, this deep red color pattern has been associated with changes in blood composition."
         case .unknown:
             return "Face your nail toward the camera in good lighting and try again."
-        }
-    }
-
-    var urgency: UrgencyLevel {
-        switch self {
-        case .healthy, .unknown:           return .none
-        case .pallidAnemia, .polycythemia,
-             .redLunula, .azureLunula:     return .consult
-        case .cyanosis, .terryNails,
-             .lindsaysNails, .leukonychia,
-             .yellowNailSyndrome,
-             .splinterHemorrhage:          return .seeDoctor
-        case .melanonychia:                return .urgent
         }
     }
 
@@ -275,33 +262,6 @@ enum NailStatus: String, CaseIterable, Codable {
             return [NailCitation(authors: "Cashman MW, Sloan SB", year: 2010, title: "Nutrition and nail disease", journal: "Clin Dermatol", detail: "28(4):420-5")]
         case .polycythemia:
             return [NailCitation(authors: "Fawcett RS et al.", year: 2004, title: "Nail abnormalities: clues to systemic disease", journal: "Am Fam Physician", detail: "69(6):1417-24")]
-        }
-    }
-}
-
-// MARK: - Urgency
-
-enum UrgencyLevel {
-    case none
-    case consult
-    case seeDoctor
-    case urgent
-
-    var labelJP: String {
-        switch self {
-        case .none:      return ""
-        case .consult:   return "気になる場合は相談"
-        case .seeDoctor: return "受診をおすすめ"
-        case .urgent:    return "早めに皮膚科へ"
-        }
-    }
-
-    var color: UIColor {
-        switch self {
-        case .none:      return .systemGray3
-        case .consult:   return .systemOrange
-        case .seeDoctor: return UIColor(red: 0.90, green: 0.30, blue: 0.10, alpha: 1)
-        case .urgent:    return .systemRed
         }
     }
 }

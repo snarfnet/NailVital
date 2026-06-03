@@ -90,8 +90,8 @@ struct NailAnalyzer {
         let lunulaStatus = lunulaHSB.map { analyzeSingle($0) } ?? plateStatus
         let tipStatus    = tipHSB.map    { analyzeSingle($0) } ?? plateStatus
 
-        // Overall = most notable
-        let overall = mostSevere([plateStatus, lunulaStatus, tipStatus])
+        // Overall = plate status as primary (largest zone)
+        let overall = plateStatus
         return (overall, lunulaStatus, plateStatus, tipStatus)
     }
 
@@ -108,22 +108,6 @@ struct NailAnalyzer {
         if hsb.isWhite()     { return .leukonychia }
         if hsb.isPink()      { return .healthy }
         return .unknown
-    }
-
-    // MARK: - Severity ranking
-
-    private static let severityOrder: [NailStatus] = [
-        .melanonychia, .splinterHemorrhage, .cyanosis,
-        .azureLunula, .redLunula, .lindsaysNails, .terryNails,
-        .yellowNailSyndrome, .polycythemia,
-        .leukonychia, .pallidAnemia, .healthy, .unknown
-    ]
-
-    static func mostSevere(_ statuses: [NailStatus]) -> NailStatus {
-        statuses.min(by: {
-            (severityOrder.firstIndex(of: $0) ?? 99) <
-            (severityOrder.firstIndex(of: $1) ?? 99)
-        }) ?? .unknown
     }
 
     // MARK: - Pixel color extraction

@@ -17,6 +17,7 @@ struct ResultDetailView: View {
                     ForEach(results) { result in
                         ResultCard(result: result)
                     }
+                    DisclaimerBanner()
                 }
                 .padding(18)
             }
@@ -49,11 +50,14 @@ private struct DisclaimerBanner: View {
                 .foregroundColor(.orange)
                 .font(.title3)
             VStack(alignment: .leading, spacing: 4) {
-                Text("参考情報として確認してください")
+                Text("医療機器ではありません")
                     .font(.subheadline.weight(.bold))
                     .foregroundColor(NailVitalStyle.ink)
-                Text("このアプリは医療診断を行いません。痛み、変色、縦すじなどが続く場合は医師に相談してください。")
+                Text("このアプリは医療機器ではなく、いかなる疾患の診断・治療・予防も行いません。表示される情報は色の特徴に関する教育的な参考情報です。健康上の懸念がある場合は、必ず医療専門家にご相談ください。")
                     .font(.caption)
+                    .foregroundColor(NailVitalStyle.muted)
+                Text("This app is NOT a medical device and does NOT diagnose, treat, or prevent any disease. Information shown is educational reference about color characteristics. Always consult a healthcare professional for any health concerns.")
+                    .font(.caption2)
                     .foregroundColor(NailVitalStyle.muted)
             }
         }
@@ -104,14 +108,6 @@ struct ResultCard: View {
                         .font(.caption)
                         .foregroundColor(NailVitalStyle.muted)
                         .fixedSize(horizontal: false, vertical: true)
-                }
-
-                if result.overallStatus.urgency != .none {
-                    StatusPill(
-                        text: result.overallStatus.urgency.labelJP,
-                        icon: "stethoscope",
-                        color: Color(result.overallStatus.urgency.color)
-                    )
                 }
 
                 if !result.overallStatus.citations.isEmpty {
