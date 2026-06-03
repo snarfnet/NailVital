@@ -7,6 +7,7 @@ final class CameraManager: NSObject, ObservableObject {
     @Published var nailResults: [NailHealthResult] = []
     @Published var handDetected = false
     @Published var fingerDots: [(point: CGPoint, finger: Finger, status: NailStatus)] = []
+    @Published var cameraAuthorized = false
 
     let session = AVCaptureSession()
     private let videoOutput = AVCaptureVideoDataOutput()
@@ -21,7 +22,21 @@ final class CameraManager: NSObject, ObservableObject {
 
     // MARK: - Setup
 
-    func setup() {
+    func requestAccessAndSetup() {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            setup()
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
+                if granted { self?.setup() }
+                DispatchQueue.main.async { self?.cameraAuthorized = granted }
+            }
+        default:
+            DispatchQueue.main.async { self.cameraAuthorized = false }
+        }
+    }
+
+    private func setup() {
         guard !isConfigured else { return }
         session.sessionPreset = .hd1280x720
         guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
@@ -34,6 +49,7 @@ final class CameraManager: NSObject, ObservableObject {
         if session.canAddOutput(videoOutput) { session.addOutput(videoOutput) }
         videoOutput.connection(with: .video)?.videoOrientation = .portrait
         isConfigured = true
+        DispatchQueue.main.async { self.cameraAuthorized = true }
     }
 
     func start() { processingQueue.async { if !self.session.isRunning { self.session.startRunning() } } }

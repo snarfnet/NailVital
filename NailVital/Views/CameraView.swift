@@ -72,7 +72,7 @@ struct MainCameraView: View {
                     .animation(.easeInOut(duration: 0.2), value: showInstructions)
             }
         }
-        .onAppear { camera.setup(); camera.start() }
+        .onAppear { camera.requestAccessAndSetup(); camera.start() }
         .onDisappear { camera.stop() }
         .sheet(isPresented: $showResults) {
             ResultDetailView(results: camera.nailResults) {
