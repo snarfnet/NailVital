@@ -50,11 +50,8 @@ struct DisclaimerView: View {
     @Binding var accepted: Bool
 
     var body: some View {
-        ZStack {
-            NailVitalStyle.pageBackground.ignoresSafeArea()
-
-            ScrollView {
-                VStack(spacing: 28) {
+        ScrollView {
+            VStack(spacing: 28) {
                     Spacer(minLength: 20)
 
                     ZStack {
@@ -108,8 +105,8 @@ struct DisclaimerView: View {
                     }
                 }
                 .padding(24)
-            }
         }
+        .background(NailVitalStyle.pageBackground.ignoresSafeArea())
     }
 }
 

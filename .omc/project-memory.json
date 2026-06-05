@@ -1,0 +1,110 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1780101173100,
+  "projectRoot": "C:\\Users\\Windows\\NailVital",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "NailVital": {
+      "path": "NailVital",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1780101173053,
+      "keyFiles": [
+        "Info.plist",
+        "LaunchScreen.storyboard",
+        "NailVitalApp.swift"
+      ]
+    },
+    "NailVital\\Models": {
+      "path": "NailVital\\Models",
+      "purpose": "Data models",
+      "fileCount": 2,
+      "lastAccessed": 1780101173055,
+      "keyFiles": [
+        "NailHealthResult.swift",
+        "NailRecord.swift"
+      ]
+    },
+    "NailVital\\Views": {
+      "path": "NailVital\\Views",
+      "purpose": "View templates",
+      "fileCount": 6,
+      "lastAccessed": 1780101173057,
+      "keyFiles": [
+        "CameraView.swift",
+        "HistoryView.swift",
+        "InstructionOverlayView.swift"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "project.yml",
+      "accessCount": 8,
+      "lastAccessed": 1780530004485,
+      "type": "file"
+    },
+    {
+      "path": "NailVital\\Info.plist",
+      "accessCount": 5,
+      "lastAccessed": 1780529197100,
+      "type": "file"
+    },
+    {
+      "path": "NailVital\\Assets.xcassets\\AppIcon.appiconset\\Contents.json",
+      "accessCount": 4,
+      "lastAccessed": 1780529191254,
+      "type": "file"
+    },
+    {
+      "path": "NailVital",
+      "accessCount": 1,
+      "lastAccessed": 1780103122666,
+      "type": "directory"
+    },
+    {
+      "path": "NailVital\\Views\\CameraView.swift",
+      "accessCount": 1,
+      "lastAccessed": 1780103125970,
+      "type": "file"
+    },
+    {
+      "path": "NailVital\\Views\\NailVitalDesign.swift",
+      "accessCount": 1,
+      "lastAccessed": 1780103126542,
+      "type": "file"
+    },
+    {
+      "path": "NailVital\\PrivacyInfo.xcprivacy",
+      "accessCount": 1,
+      "lastAccessed": 1780106694059,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
