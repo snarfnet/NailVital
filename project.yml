@@ -11,7 +11,7 @@ settings:
     MARKETING_VERSION: "1.0"
     CURRENT_PROJECT_VERSION: "2"
     SWIFT_VERSION: "5.9"
-    TARGETED_DEVICE_FAMILY: "1,2"  # iPhone only
+    TARGETED_DEVICE_FAMILY: "1,2"
     SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
 
 targets:
@@ -26,7 +26,7 @@ targets:
       path: NailVital/Info.plist
       properties:
         CFBundleDisplayName: "Nailiro Log"
-        NSCameraUsageDescription: "ネイル写真と色のメモを記録するためにカメラを使用します。"
+        NSCameraUsageDescription: "Take nail photos and save color notes."
         LSRequiresIPhoneOS: true
         UIRequiresFullScreen: true
         UILaunchScreen:
@@ -44,6 +44,7 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.snarfnet.nailvital
         INFOPLIST_FILE: NailVital/Info.plist
         GENERATE_INFOPLIST_FILE: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         CODE_SIGN_STYLE: Manual
         DEVELOPMENT_TEAM: 83VGKGSQUH
         TARGETED_DEVICE_FAMILY: "1,2"
