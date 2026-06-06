@@ -1,10 +1,10 @@
-# Nail Log Resubmission Checklist
+# Nailiro Log Resubmission Checklist
 
 ## App Store Connect Metadata
 
 Use `AppStoreMetadata.json` for the values to paste into App Store Connect.
 
-- App name: `Nail Log`
+- App name: `Nailiro Log`
 - Subtitle: `Nail photos and color notes`
 - Keywords: `nails,nail log,nail memo,beauty,color,design,photo,salon,self care,style`
 - Upload screenshots from `screenshots/`

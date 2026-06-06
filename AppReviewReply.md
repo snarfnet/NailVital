@@ -6,7 +6,7 @@ We updated the app so it is clearly a beauty and personal nail logging app. The 
 
 Changes made:
 
-- Renamed the displayed app name from "Nail Vital" to "Nail Log".
+- Renamed the displayed app name from "Nail Vital" to "Nailiro Log".
 - Changed the camera permission text to explain that the camera is used for nail photos and color notes.
 - Removed medical literature, condition names, disease-related descriptions, and the references tab.
 - Reworked the result screen into a personal nail color note screen.
@@ -28,11 +28,11 @@ Promotional Text:
 Save nail photos, colors, and notes so you can look back at your favorite nail styles.
 
 Description:
-Nail Log is a simple beauty note app for saving nail photos, color impressions, and personal memos.
+Nailiro Log is a simple beauty note app for saving nail photos, color impressions, and personal memos.
 
 Use it to remember salon colors, home nail looks, and ideas you want to try next. Save the date, color tone, and a short memo, then look back through your nail history whenever you need it.
 
 This app is for personal beauty notes. It does not provide medical data, health measurements, diagnosis, or treatment advice.
 
 Keywords:
-nails,nail log,nail memo,beauty,color,design,photo,salon,self care,style
+nails,nailiro,nail memo,beauty,color,design,photo,salon,self care,style

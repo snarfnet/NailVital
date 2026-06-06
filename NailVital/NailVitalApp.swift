@@ -59,7 +59,7 @@ struct DisclaimerView: View {
                     }
 
                     VStack(spacing: 8) {
-                        Text("Nail Log")
+                        Text("Nailiro Log")
                             .font(.system(.largeTitle, design: .serif).weight(.bold))
                             .foregroundColor(NailVitalStyle.ink)
                         Text("ネイル写真と色のメモを残す")

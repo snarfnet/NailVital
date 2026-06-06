@@ -5,7 +5,7 @@
     <key>NSCameraUsageDescription</key>
     <string>ネイル写真と色のメモを記録するためにカメラを使用します。</string>
     <key>CFBundleDisplayName</key>
-    <string>Nail Log</string>
+    <string>Nailiro Log</string>
     <key>CFBundleName</key>
     <string>NailVital</string>
     <key>CFBundleIdentifier</key>

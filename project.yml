@@ -25,7 +25,7 @@ targets:
     info:
       path: NailVital/Info.plist
       properties:
-        CFBundleDisplayName: "Nail Log"
+        CFBundleDisplayName: "Nailiro Log"
         NSCameraUsageDescription: "ネイル写真と色のメモを記録するためにカメラを使用します。"
         LSRequiresIPhoneOS: true
         UIRequiresFullScreen: true

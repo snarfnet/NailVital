@@ -90,7 +90,7 @@ private struct HeaderBar: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 3) {
-                Text("Nail Log")
+                Text("Nailiro Log")
                     .font(.system(.title3, design: .serif).weight(.bold))
                     .foregroundColor(.white)
                 Text("爪を枠の中に入れてください")
