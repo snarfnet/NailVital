@@ -329,6 +329,24 @@ def wait_for_latest_build(app_id):
     raise RuntimeError("No valid build found.")
 
 
+def print_builds(app_id):
+    response, body = api_json("GET", f"/builds?filter[app]={app_id}&limit=200")
+    require_ok(response, "List builds")
+    rows = body.get("data", [])
+    def sort_key(item):
+        uploaded = item.get("attributes", {}).get("uploadedDate") or ""
+        return uploaded
+    for build in sorted(rows, key=sort_key, reverse=True):
+        attrs = build["attributes"]
+        print(
+            "Build "
+            f"{attrs.get('version')} / "
+            f"{attrs.get('processingState')} / "
+            f"{attrs.get('uploadedDate')} / "
+            f"{build['id']}"
+        )
+
+
 def assign_build(version_id, build_id):
     response = api("PATCH", f"/builds/{build_id}", json={
         "data": {"type": "builds", "id": build_id, "attributes": {"usesNonExemptEncryption": False}}
@@ -479,6 +497,9 @@ def main():
     write_key_file()
     metadata = load_metadata()
     app_id = find_app_id()
+    if os.environ.get("LIST_BUILDS_ONLY") == "1":
+        print_builds(app_id)
+        return
     version_id = find_version(app_id)
     update_app_info(app_id, metadata)
     update_version_metadata(version_id, metadata)
