@@ -501,6 +501,8 @@ def main():
         print_builds(app_id)
         return
     version_id = find_version(app_id)
+    if os.environ.get("SUBMIT_FOR_REVIEW", "1") == "1":
+        cancel_open_submissions(app_id)
     update_app_info(app_id, metadata)
     update_version_metadata(version_id, metadata)
     update_review_detail(version_id, metadata)
