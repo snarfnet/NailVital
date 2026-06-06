@@ -2,18 +2,16 @@ Hello App Review Team,
 
 Thank you for the review.
 
-We updated the app so it is clearly a beauty and personal nail logging app. The app no longer presents itself as a medical, health measurement, diagnosis, or treatment advice app.
+We updated the app icon to remove the elements that could suggest medical features. The previous icon included a medical-style cross and waveform. The new icon uses only beauty-related elements: a nail polish bottle and nail color swatches.
 
-Changes made:
+The app and metadata now present the app as a personal nail photo and color note app. It does not provide medical data, health measurements, diagnosis, risk evaluation, or treatment advice.
 
-- Renamed the displayed app name from "Nail Vital" to "Nailiro Log".
-- Changed the camera permission text to explain that the camera is used for nail photos and color notes.
-- Removed medical literature, condition names, disease-related descriptions, and the references tab.
-- Reworked the result screen into a personal nail color note screen.
-- Updated onboarding, history, and camera screen wording around beauty notes and nail color records.
-- Replaced screenshots with beauty-log focused screenshots.
+Changes made in this resubmission:
 
-We do not have regulatory approval documentation because the updated app does not provide medical data, health measurements, diagnoses, risk evaluation, or treatment advice.
+- Replaced the app icon across all iPhone, iPad, and App Store marketing sizes.
+- Removed the medical-style cross from the icon.
+- Removed the waveform/health-monitor style line from the icon.
+- Kept the app positioned as "Nailiro Log", a beauty nail logging app.
 
 Please review the updated build and metadata.
 
