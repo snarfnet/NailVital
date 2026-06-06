@@ -46,6 +46,7 @@ jobs:
             -destination "generic/platform=iOS" \
             -archivePath build/NailVital.xcarchive \
             CODE_SIGN_STYLE=Automatic \
+            CODE_SIGN_IDENTITY="Apple Distribution" \
             DEVELOPMENT_TEAM=83VGKGSQUH \
             CURRENT_PROJECT_VERSION=$(( ${{ github.run_number }} + 28 )) \
             -allowProvisioningUpdates \
