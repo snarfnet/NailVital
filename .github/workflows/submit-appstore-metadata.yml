@@ -11,6 +11,10 @@ on:
         options:
           - "true"
           - "false"
+      build_number:
+        description: "Build number to attach. Leave blank to use newest valid build."
+        required: false
+        default: ""
 
 jobs:
   submit:
@@ -34,5 +38,6 @@ jobs:
           ASC_API_KEY_CONTENT: ${{ secrets.ASC_API_KEY_CONTENT }}
           BUNDLE_ID: ${{ secrets.BUNDLE_ID }}
           APP_VERSION: "1.0"
+          BUILD_NUMBER: ${{ inputs.build_number }}
           SUBMIT_FOR_REVIEW: ${{ inputs.submit_for_review == 'true' && '1' || '0' }}
         run: python scripts/submit_appstore_metadata.py

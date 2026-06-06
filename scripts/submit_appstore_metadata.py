@@ -15,8 +15,12 @@ BUNDLE_ID = os.environ.get("BUNDLE_ID", "com.snarfnet.nailvital")
 APP_VERSION = os.environ.get("APP_VERSION", "1.0")
 METADATA_PATH = Path(os.environ.get("METADATA_PATH", "AppStoreMetadata.json"))
 SCREENSHOT_DIR = Path(os.environ.get("SCREENSHOT_DIR", "screenshots"))
-SCREENSHOT_DISPLAY_TYPE = os.environ.get("SCREENSHOT_DISPLAY_TYPE", "APP_IPHONE_67")
+BUILD_NUMBER = os.environ.get("BUILD_NUMBER", "")
 P8_PATH = Path(os.environ.get("ASC_P8_PATH", "/tmp/AuthKey.p8"))
+SCREENSHOT_GROUPS = [
+    ("APP_IPHONE_67", [f"screenshot_{index:02d}.png" for index in range(1, 4)]),
+    ("APP_IPAD_PRO_3GEN_129", [f"ipad_screenshot_{index:02d}.png" for index in range(1, 4)]),
+]
 
 
 def env_first(*names):
@@ -298,15 +302,28 @@ def update_review_detail(version_id, metadata):
 
 def wait_for_latest_build(app_id):
     for attempt in range(90):
-        response, body = api_json("GET", f"/builds?filter[app]={app_id}&sort=-uploadedDate&limit=10")
+        query = f"/builds?filter[app]={app_id}&limit=200"
+        if BUILD_NUMBER:
+            query += f"&filter[version]={BUILD_NUMBER}"
+        response, body = api_json("GET", query)
         require_ok(response, "List builds")
+        valid_builds = []
         for build in body.get("data", []):
             attrs = build["attributes"]
             version = attrs.get("version")
             state = attrs.get("processingState")
             print(f"Build {version}: {state}")
             if state == "VALID":
-                return build["id"]
+                valid_builds.append(build)
+        if BUILD_NUMBER and valid_builds:
+            return valid_builds[0]["id"]
+        if valid_builds:
+            def build_number(item):
+                try:
+                    return int(item["attributes"].get("version", "0"))
+                except ValueError:
+                    return 0
+            return max(valid_builds, key=build_number)["id"]
         print(f"Waiting for valid build {attempt + 1}/90")
         time.sleep(30)
     raise RuntimeError("No valid build found.")
@@ -327,36 +344,39 @@ def assign_build(version_id, build_id):
 
 
 def upload_screenshots(version_id):
-    files = [SCREENSHOT_DIR / f"screenshot_{index:02d}.png" for index in range(1, 4)]
-    for file in files:
-        if not file.exists():
-            raise RuntimeError(f"Missing screenshot: {file}")
     for loc in ensure_version_localizations(version_id).values():
         locale = loc["attributes"]["locale"]
         print(f"Screenshots for {locale}")
         sets = list_all(f"/appStoreVersionLocalizations/{loc['id']}/appScreenshotSets?limit=200")
-        set_id = None
+        existing_sets = {
+            screenshot_set["attributes"]["screenshotDisplayType"]: screenshot_set["id"]
+            for screenshot_set in sets
+        }
         for screenshot_set in sets:
             for screenshot in list_all(f"/appScreenshotSets/{screenshot_set['id']}/appScreenshots?limit=200"):
                 api("DELETE", f"/appScreenshots/{screenshot['id']}")
-            if screenshot_set["attributes"]["screenshotDisplayType"] == SCREENSHOT_DISPLAY_TYPE:
-                set_id = screenshot_set["id"]
-        if not set_id:
-            response, body = api_json("POST", "/appScreenshotSets", json={
-                "data": {
-                    "type": "appScreenshotSets",
-                    "attributes": {"screenshotDisplayType": SCREENSHOT_DISPLAY_TYPE},
-                    "relationships": {
-                        "appStoreVersionLocalization": {
-                            "data": {"type": "appStoreVersionLocalizations", "id": loc["id"]}
-                        }
-                    },
-                }
-            })
-            require_ok(response, "Create screenshot set")
-            set_id = body["data"]["id"]
-        for file in files:
-            upload_screenshot(set_id, file)
+        for display_type, filenames in SCREENSHOT_GROUPS:
+            files = [SCREENSHOT_DIR / filename for filename in filenames]
+            for file in files:
+                if not file.exists():
+                    raise RuntimeError(f"Missing screenshot: {file}")
+            set_id = existing_sets.get(display_type)
+            if not set_id:
+                response, body = api_json("POST", "/appScreenshotSets", json={
+                    "data": {
+                        "type": "appScreenshotSets",
+                        "attributes": {"screenshotDisplayType": display_type},
+                        "relationships": {
+                            "appStoreVersionLocalization": {
+                                "data": {"type": "appStoreVersionLocalizations", "id": loc["id"]}
+                            }
+                        },
+                    }
+                })
+                require_ok(response, f"Create screenshot set {display_type}")
+                set_id = body["data"]["id"]
+            for file in files:
+                upload_screenshot(set_id, file)
 
 
 def upload_screenshot(set_id, file):
