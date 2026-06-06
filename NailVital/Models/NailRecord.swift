@@ -16,7 +16,7 @@ struct StoredFingerResult: Codable, Identifiable {
     var overallStatus: NailStatus { NailStatus(rawValue: overallStatusRaw) ?? .unknown }
 }
 
-// MARK: - Scan record
+// MARK: - Nail color record
 
 struct NailRecord: Codable, Identifiable {
     let id: UUID
@@ -25,9 +25,8 @@ struct NailRecord: Codable, Identifiable {
     var note: String
 
     var dominantStatus: NailStatus {
-        // Return the most notable (non-healthy) status
         let notable = results.map(\.overallStatus)
-            .filter { $0 != .healthy && $0 != .unknown }
+            .filter { $0 != .softPink && $0 != .unknown }
             .first
         return notable ?? (results.first?.overallStatus ?? .unknown)
     }
@@ -39,7 +38,7 @@ final class NailRecordRepository: ObservableObject {
     @Published private(set) var records: [NailRecord] = []
 
     private let key = "nailRecords_v1"
-    private let maxRecords = 90  // 3 months of daily scans
+    private let maxRecords = 90
 
     init() { load() }
 

@@ -28,17 +28,12 @@ struct RootTabView: View {
         TabView {
             MainCameraView()
                 .tabItem {
-                    Label("スキャン", systemImage: "camera.viewfinder")
+                    Label("記録", systemImage: "camera.viewfinder")
                 }
 
             HistoryView(repository: repository)
                 .tabItem {
                     Label("履歴", systemImage: "clock.arrow.circlepath")
-                }
-
-            ReferencesView()
-                .tabItem {
-                    Label("文献", systemImage: "doc.text.magnifyingglass")
                 }
         }
     }
@@ -64,10 +59,10 @@ struct DisclaimerView: View {
                     }
 
                     VStack(spacing: 8) {
-                        Text("Nail Vital")
+                        Text("Nail Log")
                             .font(.system(.largeTitle, design: .serif).weight(.bold))
                             .foregroundColor(NailVitalStyle.ink)
-                        Text("爪の色を手がかりに、気づきを残す")
+                        Text("ネイル写真と色のメモを残す")
                             .font(.subheadline)
                             .foregroundColor(NailVitalStyle.muted)
                     }
@@ -75,19 +70,24 @@ struct DisclaimerView: View {
                     VitalCard {
                         VStack(alignment: .leading, spacing: 18) {
                             DisclaimerRow(
-                                icon: "exclamationmark.shield",
-                                title: "診断アプリではありません",
-                                text: "結果は参考情報です。気になる症状がある場合は医師に相談してください。"
+                                icon: "paintpalette",
+                                title: "美容メモ用のアプリです",
+                                text: "ネイル写真、色、見た目のメモを端末内に残せます。"
                             )
                             DisclaimerRow(
-                                icon: "book.closed",
-                                title: "医学文献をもとに表示します",
-                                text: "爪の色と見え方から、関連が報告されている状態を示します。"
+                                icon: "camera",
+                                title: "色を自動でメモします",
+                                text: "カメラ画像から色の傾向を拾い、あとで見返しやすい名前で保存します。"
                             )
                             DisclaimerRow(
                                 icon: "lock.shield",
                                 title: "履歴は端末内に保存します",
-                                text: "日々の変化を見返せるよう、スキャン結果を端末に記録できます。"
+                                text: "お気に入りの色やデザインをあとから見返せます。"
+                            )
+                            DisclaimerRow(
+                                icon: "info.circle",
+                                title: "個人メモとして使えます",
+                                text: "ネイルの色やデザインを見返すための記録アプリです。"
                             )
                         }
                     }

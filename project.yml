@@ -25,8 +25,8 @@ targets:
     info:
       path: NailVital/Info.plist
       properties:
-        CFBundleDisplayName: "Nail Vital"
-        NSCameraUsageDescription: "爪の色を解析し、健康チェックの参考情報を表示するためにカメラを使用します。"
+        CFBundleDisplayName: "Nail Log"
+        NSCameraUsageDescription: "ネイル写真と色のメモを記録するためにカメラを使用します。"
         LSRequiresIPhoneOS: true
         UIRequiresFullScreen: true
         UILaunchScreen:

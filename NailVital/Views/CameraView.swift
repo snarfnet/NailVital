@@ -90,7 +90,7 @@ private struct HeaderBar: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 3) {
-                Text("Nail Vital")
+                Text("Nail Log")
                     .font(.system(.title3, design: .serif).weight(.bold))
                     .foregroundColor(.white)
                 Text("爪を枠の中に入れてください")
@@ -191,7 +191,7 @@ private struct BottomPanel: View {
             }
 
             Button(action: onAnalyze) {
-                Label(handDetected ? "結果を見る" : "手を検出していません", systemImage: "waveform.path.ecg")
+                Label(handDetected ? "色メモを見る" : "手を検出していません", systemImage: "paintpalette.fill")
                     .font(.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)

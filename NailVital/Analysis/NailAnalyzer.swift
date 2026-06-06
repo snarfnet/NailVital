@@ -54,32 +54,28 @@ struct NailAnalyzer {
 
         // --- Zone-comparative conditions first ---
 
-        // Terry's nails: white plate + pink tip band
         if let p = plateHSB, let t = tipHSB,
            p.isWhite() && t.isPink() {
-            return (.terryNails,
+            return (.milkyWhite,
                     lunulaHSB.map { analyzeSingle($0) } ?? .unknown,
-                    .terryNails,
-                    .terryNails)
+                    .milkyWhite,
+                    .milkyWhite)
         }
 
-        // Lindsay's nails: white/pale lunula + reddish tip
         if let lu = lunulaHSB, let t = tipHSB,
            lu.isWhite() && t.isReddish() {
-            return (.lindsaysNails, .lindsaysNails, .lindsaysNails, .lindsaysNails)
+            return (.twoTone, .twoTone, .twoTone, .twoTone)
         }
 
-        // Red lunula with normal plate
         if let lu = lunulaHSB, let p = plateHSB,
            lu.isRed() && !p.isRed() {
-            return (.redLunula, .redLunula,
+            return (.redAccent, .redAccent,
                     analyzeSingle(p),
                     tipHSB.map { analyzeSingle($0) } ?? .unknown)
         }
 
-        // Azure lunula
         if let lu = lunulaHSB, lu.isTeal() {
-            return (.azureLunula, .azureLunula,
+            return (.blueAccent, .blueAccent,
                     plateHSB.map { analyzeSingle($0) } ?? .unknown,
                     tipHSB.map   { analyzeSingle($0) } ?? .unknown)
         }
@@ -99,14 +95,14 @@ struct NailAnalyzer {
 
     private static func analyzeSingle(_ hsb: HSB) -> NailStatus {
         if hsb.isDark()      { return .unknown }
-        if hsb.isDarkBrown() { return .melanonychia }
-        if hsb.isDarkRed()   { return .splinterHemorrhage }
-        if hsb.isBlue()      { return .cyanosis }
-        if hsb.isYellow()    { return .yellowNailSyndrome }
-        if hsb.isDeepRed()   { return .polycythemia }
-        if hsb.isPale()      { return .pallidAnemia }
-        if hsb.isWhite()     { return .leukonychia }
-        if hsb.isPink()      { return .healthy }
+        if hsb.isDarkBrown() { return .darkLine }
+        if hsb.isDarkRed()   { return .deepRedLine }
+        if hsb.isBlue()      { return .coolBlue }
+        if hsb.isYellow()    { return .warmYellow }
+        if hsb.isDeepRed()   { return .vividRed }
+        if hsb.isPale()      { return .paleNeutral }
+        if hsb.isWhite()     { return .clearWhite }
+        if hsb.isPink()      { return .softPink }
         return .unknown
     }
 

@@ -15,7 +15,7 @@ struct HistoryView: View {
                         VStack(spacing: 14) {
                             SectionHeader(
                                 title: "履歴",
-                                subtitle: "保存したスキャンを時系列で確認できます"
+                                subtitle: "保存したネイル色メモを時系列で確認できます"
                             )
                             ForEach(repository.records) { record in
                                 HistoryRow(record: record)
@@ -64,7 +64,7 @@ private struct EmptyHistoryView: View {
             Text("まだ履歴がありません")
                 .font(.title3.weight(.bold))
                 .foregroundColor(NailVitalStyle.ink)
-            Text("スキャン結果を保存すると、ここで変化を見返せます。")
+            Text("色メモを保存すると、ここでデザインや色の変化を見返せます。")
                 .font(.subheadline)
                 .foregroundColor(NailVitalStyle.muted)
                 .multilineTextAlignment(.center)
@@ -106,7 +106,7 @@ private struct HistoryRow: View {
                             .font(.subheadline.weight(.bold))
                             .foregroundColor(statusColor)
                     }
-                    Text("\(record.results.count)本をスキャン")
+                    Text("\(record.results.count)本を記録")
                         .font(.caption)
                         .foregroundColor(NailVitalStyle.muted)
                     if !record.note.isEmpty {
@@ -149,7 +149,7 @@ private struct RecordDetailView: View {
                     LabeledContent("日時") {
                         Text(record.date, format: .dateTime.year().month().day().hour().minute())
                     }
-                    LabeledContent("スキャン数") {
+                    LabeledContent("記録数") {
                         Text("\(record.results.count)本")
                     }
                     if !record.note.isEmpty {
@@ -157,7 +157,7 @@ private struct RecordDetailView: View {
                     }
                 }
 
-                Section("指ごとの結果") {
+                Section("指ごとの色メモ") {
                     ForEach(record.results) { r in
                         HStack(spacing: 12) {
                             Circle()

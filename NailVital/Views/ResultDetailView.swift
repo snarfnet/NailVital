@@ -10,19 +10,18 @@ struct ResultDetailView: View {
             ScrollView {
                 VStack(spacing: 18) {
                     SectionHeader(
-                        title: "スキャン結果",
-                        subtitle: "\(results.count)本の爪を解析しました"
+                        title: "色メモ",
+                        subtitle: "\(results.count)本のネイル色を記録しました"
                     )
-                    DisclaimerBanner()
                     ForEach(results) { result in
                         ResultCard(result: result)
                     }
-                    DisclaimerBanner()
+                    PersonalNoteBanner()
                 }
                 .padding(18)
             }
             .background(NailVitalStyle.pageBackground)
-            .navigationTitle("結果")
+            .navigationTitle("色メモ")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -41,29 +40,26 @@ struct ResultDetailView: View {
     }
 }
 
-// MARK: - Disclaimer
+// MARK: - Personal Note
 
-private struct DisclaimerBanner: View {
+private struct PersonalNoteBanner: View {
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
-            Image(systemName: "exclamationmark.shield.fill")
-                .foregroundColor(.orange)
+            Image(systemName: "info.circle.fill")
+                .foregroundColor(NailVitalStyle.teal)
                 .font(.title3)
             VStack(alignment: .leading, spacing: 4) {
-                Text("医療機器ではありません")
+                Text("美容目的の個人メモです")
                     .font(.subheadline.weight(.bold))
                     .foregroundColor(NailVitalStyle.ink)
-                Text("このアプリは医療機器ではなく、いかなる疾患の診断・治療・予防も行いません。表示される情報は色の特徴に関する教育的な参考情報です。健康上の懸念がある場合は、必ず医療専門家にご相談ください。")
+                Text("ネイル写真、色、見た目の印象を保存して、あとから見返せます。")
                     .font(.caption)
-                    .foregroundColor(NailVitalStyle.muted)
-                Text("This app is NOT a medical device and does NOT diagnose, treat, or prevent any disease. Information shown is educational reference about color characteristics. Always consult a healthcare professional for any health concerns.")
-                    .font(.caption2)
                     .foregroundColor(NailVitalStyle.muted)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(14)
-        .background(Color.orange.opacity(0.10))
+        .background(NailVitalStyle.teal.opacity(0.09))
         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
     }
 }
@@ -72,7 +68,6 @@ private struct DisclaimerBanner: View {
 
 struct ResultCard: View {
     let result: NailHealthResult
-    @State private var showCitations = false
 
     var statusColor: Color { Color(result.overallStatus.statusColor) }
 
@@ -108,13 +103,6 @@ struct ResultCard: View {
                         .font(.caption)
                         .foregroundColor(NailVitalStyle.muted)
                         .fixedSize(horizontal: false, vertical: true)
-                }
-
-                if !result.overallStatus.citations.isEmpty {
-                    ReferencesDisclosure(
-                        citations: result.overallStatus.citations,
-                        showCitations: $showCitations
-                    )
                 }
 
                 HStack(spacing: 8) {
@@ -191,68 +179,6 @@ private struct ZoneChip: View {
             RoundedRectangle(cornerRadius: 8, style: .continuous)
                 .stroke(NailVitalStyle.line, lineWidth: 1)
         )
-    }
-}
-
-// MARK: - References
-
-private struct ReferencesDisclosure: View {
-    let citations: [NailCitation]
-    @Binding var showCitations: Bool
-
-    var body: some View {
-        VStack(spacing: 10) {
-            Button {
-                withAnimation(.easeInOut(duration: 0.2)) { showCitations.toggle() }
-            } label: {
-                HStack(spacing: 8) {
-                    Image(systemName: "doc.text")
-                    Text("参考文献 \(citations.count)件")
-                    Spacer()
-                    Image(systemName: showCitations ? "chevron.up" : "chevron.down")
-                        .font(.caption)
-                }
-                .font(.caption.weight(.semibold))
-                .foregroundColor(NailVitalStyle.teal)
-            }
-
-            if showCitations {
-                VStack(alignment: .leading, spacing: 10) {
-                    ForEach(citations.indices, id: \.self) { i in
-                        CitationRow(citation: citations[i], index: i + 1)
-                    }
-                }
-                .padding(12)
-                .background(NailVitalStyle.teal.opacity(0.07))
-                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-            }
-        }
-    }
-}
-
-private struct CitationRow: View {
-    let citation: NailCitation
-    let index: Int
-
-    var body: some View {
-        HStack(alignment: .top, spacing: 8) {
-            Text("[\(index)]")
-                .font(.caption2.monospaced())
-                .foregroundColor(NailVitalStyle.muted)
-                .frame(width: 24, alignment: .leading)
-            VStack(alignment: .leading, spacing: 2) {
-                Text(citation.authors + " (\(citation.year))")
-                    .font(.caption2.weight(.bold))
-                    .foregroundColor(NailVitalStyle.ink)
-                Text(citation.title)
-                    .font(.caption2)
-                    .foregroundColor(NailVitalStyle.ink)
-                Text("\(citation.journal). \(citation.detail)")
-                    .font(.caption2)
-                    .foregroundColor(NailVitalStyle.muted)
-                    .italic()
-            }
-        }
     }
 }
 

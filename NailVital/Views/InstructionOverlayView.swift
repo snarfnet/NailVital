@@ -23,7 +23,7 @@ struct InstructionOverlayView: View {
                         TipRow(icon: "hand.raised", text: "手の甲をカメラに向けます。")
                         TipRow(icon: "ruler", text: "カメラから約15cm離してください。")
                         TipRow(icon: "sun.max", text: "明るい場所で、爪の反射を避けます。")
-                        TipRow(icon: "exclamationmark.shield", text: "結果は参考情報です。診断ではありません。")
+                        TipRow(icon: "paintpalette", text: "色メモは美容記録として保存できます。")
                     }
 
                     Button {

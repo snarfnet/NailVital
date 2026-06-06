@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
     <key>NSCameraUsageDescription</key>
-    <string>爪の色を解析し、健康チェックの参考情報を表示するためにカメラを使用します。</string>
+    <string>ネイル写真と色のメモを記録するためにカメラを使用します。</string>
     <key>CFBundleDisplayName</key>
-    <string>Nail Vital</string>
+    <string>Nail Log</string>
     <key>CFBundleName</key>
     <string>NailVital</string>
     <key>CFBundleIdentifier</key>

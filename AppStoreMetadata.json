@@ -1,0 +1,15 @@
+{
+  "appName": "Nail Log",
+  "subtitle": "Nail photos and color notes",
+  "promotionalText": "Save nail photos, colors, and notes so you can look back at your favorite nail styles.",
+  "description": "Nail Log is a simple beauty note app for saving nail photos, color impressions, and personal memos.\n\nUse it to remember salon colors, home nail looks, and ideas you want to try next. Save the date, color tone, and a short memo, then look back through your nail history whenever you need it.\n\nThis app is for personal beauty notes. It does not provide medical data, health measurements, diagnosis, or treatment advice.",
+  "keywords": "nails,nail log,nail memo,beauty,color,design,photo,salon,self care,style",
+  "reviewNotes": "Hello App Review Team,\n\nThank you for the review.\n\nWe updated the app so it is clearly a beauty and personal nail logging app. The app no longer presents itself as a medical, health measurement, diagnosis, or treatment advice app.\n\nChanges made:\n\n- Renamed the displayed app name from \"Nail Vital\" to \"Nail Log\".\n- Changed the camera permission text to explain that the camera is used for nail photos and color notes.\n- Removed medical literature, condition names, disease-related descriptions, and the references tab.\n- Reworked the result screen into a personal nail color note screen.\n- Updated onboarding, history, and camera screen wording around beauty notes and nail color records.\n- Replaced screenshots with beauty-log focused screenshots.\n\nWe do not have regulatory approval documentation because the updated app does not provide medical data, health measurements, diagnoses, risk evaluation, or treatment advice.\n\nPlease review the updated build and metadata.\n\nThank you.",
+  "screenshotFiles": [
+    "screenshots/screenshot_01.png",
+    "screenshots/screenshot_02.png",
+    "screenshots/screenshot_03.png"
+  ],
+  "category": "Lifestyle",
+  "contentRights": "Uses only owned or app-generated UI screenshots."
+}
